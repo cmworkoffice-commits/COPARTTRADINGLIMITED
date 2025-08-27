@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Copart Trading Limited - Premier logistics and transportation services, offering freight forwarding, warehousing, and last-mile delivery worldwide.">
+    <meta name="keywords" content="logistics, transportation, Copart Trading Limited, freight forwarding, warehousing, delivery, supply chain">
+    <meta name="author" content="Copart Trading Limited">
+    <title>Copart Trading Limited - Logistics & Transportation</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS CSS for animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts for Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-blue: #1B263B;
+            --soft-gold: #D4A017;
+            --off-white: #F5F6F5;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--off-white);
+        }
+        .hero-section {
+            background: url('https://images.pexels.com/photos/4406321/pexels-photo-4406321.jpeg?auto=compress&cs=tinysrgb&w=1920') no-repeat center center/cover;
+            min-height: 80vh;
+            color: var(--off-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(27, 38, 59, 0.7), rgba(27, 38, 59, 0.9));
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 2rem;
+        }
+        .navbar {
+            background: var(--navy-blue);
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(27, 38, 59, 0.95);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        .contact-section {
+            background: url('https://images.pexels.com/photos/4480505/pexels-photo-4480505.jpeg?auto=compress&cs=tinysrgb&w=1920') no-repeat center center/cover;
+            color: var(--off-white);
+            position: relative;
+            padding: 5rem 0;
+        }
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(27, 38, 59, 0.75);
+        }
+        .form-container, .tracking-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .sticky-quote {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 1000;
+            background: var(--soft-gold);
+            color: var(--navy-blue);
+        }
+        .cta-section {
+            background: linear-gradient(to right, var(--navy-blue), var(--soft-gold));
+            color: var(--off-white);
+        }
+        .services-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .services-carousel .card {
+            flex: 0 0 90%;
+            margin-right: 1rem;
+            scroll-snap-align: start;
+        }
+        .blog-section {
+            background: url('https://images.pexels.com/photos/4406324/pexels-photo-4406324.jpeg?auto=compress&cs=tinysrgb&w=1920') no-repeat center center/cover;
+            position: relative;
+            padding: 5rem 0;
+        }
+        .blog-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(245, 246, 245, 0.9);
+        }
+        .faq-item {
+            cursor: pointer;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+        .logo-text {
+            fill: var(--soft-gold);
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+        }
+        .logo-subtext {
+            fill: var(--off-white);
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+        }
+        @media (min-width: 768px) {
+            .services-carousel {
+                display: none;
+            }
+            .services-grid {
+                display: grid;
+            }
+        }
+        @media (max-width: 767px) {
+            .services-grid {
+                display: none;
+            }
+            .services-carousel {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="navbar fixed-top text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjQ4IiB2aWV3Qm94PSIwIDAgMTYwIDQ4IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgPHJlY3Qgd2lkdGg9IjE2MCIgaGVpZ2h0PSI0OCIgZmlsbD0iIzFCMjYzQiIvPgogICAgPGNpcmNsZSBjeD0iMjQiIGN5PSIyNCIgcj0iMTIiIGZpbGw9IiNENEExMTciLz4KICAgIDx0ZXh0IHg9IjE4IiB5PSIyOCIgZmlsbD0iI0Y1RjZGNSIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmb250LXdlaWdodD0iNzAwIj5DVDwvdGV4dD4KICAgIDx0ZXh0IHg9IjQ4IiB5PSIyOCIgZmlsbD0iI0Y1RjZGNSIgZm9udC1mYW1pbHk9IkludGVyLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmb250LXdlaWdodD0iNDAwIj5Db3BhcnQgVHJhZGluZyBMaW1pdGVkPC90ZXh0Pgo8L3N2Zz4=" alt="Copart Trading Limited Logo" class="h-12">
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="hover:text-[var(--soft-gold)] transition font-semibold">Home</a>
+                <a href="#about" class="hover:text-[var(--soft-gold)] transition font-semibold">About</a>
+                <a href="#services" class="hover:text-[var(--soft-gold)] transition font-semibold">Services</a>
+                <a href="#fleet" class="hover:text-[var(--soft-gold)] transition font-semibold">Fleet</a>
+                <a href="#tracking" class="hover:text-[var(--soft-gold)] transition font-semibold">Track Shipment</a>
+                <a href="#testimonials" class="hover:text-[var(--soft-gold)] transition font-semibold">Testimonials</a>
+                <a href="#faq" class="hover:text-[var(--soft-gold)] transition font-semibold">FAQ</a>
+                <a href="#contact" class="hover:text-[var(--soft-gold)] transition font-semibold">Contact</a>
+                <a href="#blog" class="hover:text-[var(--soft-gold)] transition font-semibold">Blog</a>
+            </div>
+            <button class="md:hidden text-white focus:outline-none" onclick="toggleMenu()">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+            <div id="mobile-menu" class="hidden md:hidden flex-col absolute top-16 left-0 w-full bg-[var(--navy-blue)] text-white p-4 z-50">
+                <a href="#home" class="py-2 hover:text-[var(--soft-gold)]">Home</a>
+                <a href="#about" class="py-2 hover:text-[var(--soft-gold)]">About</a>
+                <a href="#services" class="py-2 hover:text-[var(--soft-gold)]">Services</a>
+                <a href="#fleet" class="py-2 hover:text-[var(--soft-gold)]">Fleet</a>
+                <a href="#tracking" class="py-2 hover:text-[var(--soft-gold)]">Track Shipment</a>
+                <a href="#testimonials" class="py-2 hover:text-[var(--soft-gold)]">Testimonials</a>
+                <a href="#faq" class="py-2 hover:text-[var(--soft-gold)]">FAQ</a>
+                <a href="#contact" class="py-2 hover:text-[var(--soft-gold)]">Contact</a>
+                <a href="#blog" class="py-2 hover:text-[var(--soft-gold)]">Blog</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-content" data-aos="fade-up">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Copart Trading Limited</h1>
+            <p class="text-lg md:text-xl mb-6 max-w-2xl mx-auto">Delivering Seamless Logistics Solutions Worldwide</p>
+            <a href="#contact" class="bg-[var(--soft-gold)] text-[var(--navy-blue)] px-6 py-3 rounded-full hover:bg-yellow-600 transition font-semibold">Get a Quote</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-[var(--navy-blue)]" data-aos="fade-in">About Us</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div data-aos="fade-right">
+                    <img src="https://images.pexels.com/photos/6169668/pexels-photo-6169668.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="About Copart Trading" class="rounded-lg shadow-lg w-full h-auto">
+                </div>
+                <div data-aos="fade-left" class="flex items-center">
+                    <div>
+                        <p class="text-lg mb-4 text-[var(--navy-blue)]">Copart Trading Limited, specializing in freight forwarding, warehousing, and last-mile delivery. Our mission is to simplify your supply chain with efficiency and precision.</p>
+                        <p class="text-lg text-[var(--navy-blue)]">Leveraging cutting-edge technology and sustainable practices, we ensure your goods are delivered securely and on time, anywhere in the world.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 bg-[var(--off-white)]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-[var(--navy-blue)]" data-aos="fade-in">Our Services</h2>
+            <!-- Desktop Grid -->
+            <div class="services-grid md:grid md:grid-cols-3 gap-6">
+                <div class="card bg-white rounded-lg shadow-lg" data-aos="zoom-in">
+                    <img src="https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Freight Forwarding" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-[var(--navy-blue)]">Freight Forwarding</h3>
+                        <p class="text-[var(--navy-blue)]">Efficient global shipping with expert customs management.</p>
+                    </div>
+                </div>
+                <div class="card bg-white rounded-lg shadow-lg" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://images.pexels.com/photos/4481258/pexels-photo-4481258.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Warehousing" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-[var(--navy-blue)]">Warehousing</h3>
+                        <p class="text-[var(--navy-blue)]">Secure storage with real-time inventory tracking.</p>
+                    </div>
+                </div>
+                <div class="card bg-white rounded-lg shadow-lg" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="lastmiledelivery.jpeg" alt="Last-Mile Delivery" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-[var(--navy-blue)]">Last-Mile Delivery</h3>
+                        <p class="text-[var(--navy-blue)]">Fast and reliable delivery to your customers.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Carousel -->
+            <div class="services-carousel mx-[-1rem] px-4" data-aos="fade-up">
+                <div class="card bg-white rounded-lg shadow-lg">
+                    <img src="https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Freight Forwarding" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-[var(--navy-blue)]">Freight Forwarding</h3>
+                        <p class="text-[var(--navy-blue)]">Efficient global shipping with expert customs management.</p>
+                    </div>
+                </div>
+                <div class="card bg-white rounded-lg shadow-lg">
+                    <img src="https://images.pexels.com/photos/4481258/pexels-photo-4481258.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Warehousing" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-[var(--navy-blue)]">Warehousing</h3>
+                        <p class="text-[var(--navy-blue)]">Secure storage with real-time inventory tracking.</p>
+                    </div>
+                </div>
+                <div class="card bg-white rounded-lg shadow-lg">
+                    <img src="lastmiledelivery.jpeg" alt="Last-Mile Delivery" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-[var(--navy-blue)]">Last-Mile Delivery</h3>
+                        <p class="text-[var(--navy-blue)]">Fast and reliable delivery to your customers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fleet Section -->
+    <section id="fleet" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-[var(--navy-blue)]" data-aos="fade-in">Our Fleet</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card bg-white rounded-lg shadow-lg" data-aos="fade-up">
+                    <img src="https://images.pexels.com/photos/236705/pexels-photo-236705.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Cargo Truck" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-[var(--navy-blue)]">Cargo Trucks</h3>
+                        <p class="text-[var(--navy-blue)]">Heavy-duty vehicles for large-scale freight transport.</p>
+                    </div>
+                </div>
+                <div class="card bg-white rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.pexels.com/photos/1632790/pexels-photo-1632790.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Delivery Vans" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-[var(--navy-blue)]">Delivery Vans</h3>
+                        <p class="text-[var(--navy-blue)]">Agile vans for urban and regional deliveries.</p>
+                    </div>
+                </div>
+                <div class="card bg-white rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                    <img src="RefrigeratedTrucks.jpg" alt="Refrigerated Vehicles" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-[var(--navy-blue)]">Refrigerated Vehicles</h3>
+                        <p class="text-[var(--navy-blue)]">Specialized trucks for temperature-sensitive cargo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section id="testimonials" class="py-16 bg-[var(--off-white)]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-[var(--navy-blue)]" data-aos="fade-in">What Our Clients Say</h2>
+            <div class="testimonial-slider max-w-2xl mx-auto" data-aos="fade-in">
+                <div class="testimonial-slide active">
+                    <div class="card bg-white rounded-lg shadow-lg p-6 text-center">
+                        <p class="text-lg italic mb-4 text-[var(--navy-blue)]">"Copart Trading revolutionized our logistics with unmatched reliability."</p>
+                        <h4 class="font-semibold text-[var(--navy-blue)]">Jane Doe</h4>
+                        <p class="text-gray-600">CEO, Global Retail Inc.</p>
+                    </div>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="card bg-white rounded-lg shadow-lg p-6 text-center">
+                        <p class="text-lg italic mb-4 text-[var(--navy-blue)]">"Their tracking system provides complete visibility for our shipments."</p>
+                        <h4 class="font-semibold text-[var(--navy-blue)]">John Smith</h4>
+                        <p class="text-gray-600">Logistics Manager, TechCorp</p>
+                    </div>
+                </div>
+                <div class="testimonial-slide">
+                    <div class="card bg-white rounded-lg shadow-lg p-6 text-center">
+                        <p class="text-lg italic mb-4 text-[var(--navy-blue)]">"Professional service and exceptional support. Highly recommend!"</p>
+                        <h4 class="font-semibold text-[var(--navy-blue)]">Emily Brown</h4>
+                        <p class="text-gray-600">Supply Chain Director, FoodDist</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center space-x-4 mt-6">
+                <button onclick="prevSlide()" class="bg-[var(--navy-blue)] text-white px-4 py-2 rounded-full hover:bg-[var(--soft-gold)] hover:text-[var(--navy-blue)] transition"><i class="fas fa-chevron-left"></i></button>
+                <button onclick="nextSlide()" class="bg-[var(--navy-blue)] text-white px-4 py-2 rounded-full hover:bg-[var(--soft-gold)] hover:text-[var(--navy-blue)] transition"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking Section -->
+    <section id="tracking" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-[var(--navy-blue)]" data-aos="fade-in">Track Your Shipment</h2>
+            <div class="tracking-form mx-auto max-w-md" data-aos="fade-up">
+                <form action="track_shipment.php" method="POST">
+                    <div class="mb-4">
+                        <label for="tracking-id" class="block text-lg font-medium mb-2 text-[var(--navy-blue)]">Tracking ID</label>
+                        <input type="text" id="tracking-id" name="tracking-id" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[var(--soft-gold)]" placeholder="Enter your tracking ID" required>
+                    </div>
+                    <button type="submit" class="bg-[var(--navy-blue)] text-white w-full py-3 rounded-lg hover:bg-[var(--soft-gold)] hover:text-[var(--navy-blue)] transition">Track Now</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 bg-[var(--off-white)]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-[var(--navy-blue)]" data-aos="fade-in">Frequently Asked Questions</h2>
+            <div class="max-w-2xl mx-auto" data-aos="fade-up">
+                <div class="faq-item mb-4">
+                    <h3 class="text-xl font-semibold text-[var(--navy-blue)] flex justify-between items-center p-4 bg-white rounded-lg" onclick="toggleFAQ(this)">
+                        What services does Copart Trading Limited offer?
+                        <i class="fas fa-chevron-down"></i>
+                    </h3>
+                    <div class="faq-answer p-4 text-[var(--navy-blue)]">
+                        <p>We provide freight forwarding, warehousing, and last-mile delivery services, tailored to your logistics needs with real-time tracking and global reach.</p>
+                    </div>
+                </div>
+                <div class="faq-item mb-4">
+                    <h3 class="text-xl font-semibold text-[var(--navy-blue)] flex justify-between items-center p-4 bg-white rounded-lg" onclick="toggleFAQ(this)">
+                        How can I track my shipment?
+                        <i class="fas fa-chevron-down"></i>
+                    </h3>
+                    <div class="faq-answer p-4 text-[var(--navy-blue)]">
+                        <p>Enter your tracking ID in our tracking tool to get real-time updates on your shipment’s status.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <h3 class="text-xl font-semibold text-[var(--navy-blue)] flex justify-between items-center p-4 bg-white rounded-lg" onclick="toggleFAQ(this)">
+                        Do you offer international shipping?
+                        <i class="fas fa-chevron-down"></i>
+                    </h3>
+                    <div class="faq-answer p-4 text-[var(--navy-blue)]">
+                        <p>Yes, we specialize in international freight forwarding with comprehensive customs support.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call-to-Action Section -->
+    <section id="cta" class="cta-section py-16">
+        <div class="container mx-auto px-4 text-center" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Streamline Your Logistics?</h2>
+            <p class="text-lg mb-6 max-w-xl mx-auto">Partner with Copart Trading Limited for efficient, reliable, and sustainable logistics solutions.</p>
+            <a href="#contact" class="bg-white text-[var(--navy-blue)] px-6 py-3 rounded-full hover:bg-[var(--soft-gold)] transition font-semibold">Contact Us Today</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container mx-auto px-4" data-aos="fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8">Contact Us</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="form-container">
+                    <form action="submit_contact.php" method="POST">
+                        <div class="mb-4">
+                            <label for="name" class="block text-lg font-medium mb-2 text-[var(--navy-blue)]">Name</label>
+                            <input type="text" id="name" name="name" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[var(--soft-gold)]" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-lg font-medium mb-2 text-[var(--navy-blue)]">Email</label>
+                            <input type="email" id="email" name="email" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[var(--soft-gold)]" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="block text-lg font-medium mb-2 text-[var(--navy-blue)]">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[var(--soft-gold)]" required></textarea>
+                        </div>
+                        <button type="submit" class="bg-[var(--navy-blue)] text-white w-full py-3 rounded-lg hover:bg-[var(--soft-gold)] hover:text-[var(--navy-blue)] transition">Send Message</button>
+                    </form>
+                </div>
+                <div class="flex items-center">
+                    <div>
+                        <h3 class="text-2xl font-semibold mb-4">Get in Touch</h3>
+                        <p class="mb-2"><i class="fas fa-map-marker-alt mr-2"></i> 123 Logistics Ave, Suite 100, London, UK</p>
+                        <p class="mb-2"><i class="fas fa-phone mr-2"></i> +44 20 1234 5678</p>
+                        <p><i class="fas fa-envelope mr-2"></i> info@coparttrading.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog-section">
+        <div class="container mx-auto px-4 relative">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-[var(--navy-blue)]" data-aos="fade-in">Our Blog</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="card bg-white rounded-lg shadow-lg" data-aos="fade-up">
+                    <img src="https://images.pexels.com/photos/669619/pexels-photo-669619.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Blog Post 1" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-[var(--navy-blue)]">The Future of Logistics</h3>
+                        <p class="mb-4 text-[var(--navy-blue)]">Explore how AI and IoT are transforming logistics.</p>
+                        <a href="#" class="text-[var(--navy-blue)] hover:text-[var(--soft-gold)]">Read More</a>
+                    </div>
+                </div>
+                <div class="card bg-white rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Blog Post 2" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-[var(--navy-blue)]">Optimizing Your Supply Chain</h3>
+                        <p class="mb-4 text-[var(--navy-blue)]">Tips for cost and time efficiency in logistics.</p>
+                        <a href="#" class="text-[var(--navy-blue)] hover:text-[var(--soft-gold)]">Read More</a>
+                    </div>
+                </div>
+                <div class="card bg-white rounded-lg shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.pexels.com/photos/1739842/pexels-photo-1739842.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Blog Post 3" class="w-full h-48 object-cover rounded-t-lg">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2 text-[var(--navy-blue)]">Green Logistics</h3>
+                        <p class="mb-4 text-[var(--navy-blue)]">Sustainable practices for an eco-friendly supply chain.</p>
+                        <a href="#" class="text-[var(--navy-blue)] hover:text-[var(--soft-gold)]">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[var(--navy-blue)] text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Copart Trading Limited</h3>
+                    <p class="text-[var(--off-white)]">Your trusted partner for global logistics and transportation solutions.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul>
+                        <li><a href="#services" class="hover:text-[var(--soft-gold)]">Services</a></li>
+                        <li><a href="#fleet" class="hover:text-[var(--soft-gold)]">Fleet</a></li>
+                        <li><a href="#tracking" class="hover:text-[var(--soft-gold)]">Track Shipment</a></li>
+                        <li><a href="#contact" class="hover:text-[var(--soft-gold)]">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul>
+                        <li><a href="mailto:coparttrading@proton.me" class="hover:text-[var(--soft-gold)]">Email : coparttrading@proton.me</a></li>
+                        <li><a href="#fleet" class="hover:text-[var(--soft-gold)]">Address : </a></li>
+                    </ul>
+                </div>   
+            </div>
+            <p class="text-center mt-8 text-[var(--off-white)]">© 2025 Copart Trading Limited. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Sticky Quote Button -->
+    <a href="#contact" class="sticky-quote px-6 py-3 rounded-full shadow-lg hover:bg-yellow-600 transition font-semibold">Request a Quote</a>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Testimonial slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.testimonial-slide');
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+        }
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        }
+        setInterval(nextSlide, 5000); // Auto-slide every 5 seconds
+
+        // FAQ toggle
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            faqItem.classList.toggle('active');
+        }
+
+        // Sticky header scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>
+
+
+
